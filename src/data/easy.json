@@ -2,373 +2,378 @@
   {
     "subject": "Michael Jackson",
     "category": "Person",
+    "difficulty": "easy",
     "clues": [
-      "He began performing professionally before most children start school.",
-      "His signature move was inspired by a street dance style he saw in a music video.",
-      "He purchased the Beatles' song catalog in 1985 for roughly $47 million.",
-      "He lived on a private estate in California he named after a fictional place from a book.",
-      "His 1982 album remains the best-selling album of all time.",
-      "He was the lead vocalist of the Jackson 5 before his solo career made him the King of Pop."
+      "He started performing with his brothers as a child.",
+      "He was famous for a dance move that made it look like he was walking backwards.",
+      "He had a pet chimpanzee named Bubbles.",
+      "His album Thriller is the best-selling album of all time.",
+      "He was known as the King of Pop.",
+      "This American singer recorded Billie Jean, Beat It, and Thriller."
     ]
   },
   {
-    "subject": "The Shining",
-    "category": "Work",
-    "clues": [
-      "The author of the source novel hated this adaptation so much he later made his own version.",
-      "The hedge maze in the film does not exist in the original book.",
-      "Exactly 127 takes were demanded for one particular scene involving a door.",
-      "A famous carpet pattern from this film became an academic subject of analysis.",
-      "Jack Nicholson plays a writer who slowly loses his mind in an isolated mountain hotel.",
-      "Stanley Kubrick directed this 1980 horror film based on a Stephen King novel."
-    ]
-  },
-  {
-    "subject": "9/11",
+    "subject": "The Titanic",
     "category": "Event",
+    "difficulty": "easy",
     "clues": [
-      "Air traffic across an entire continent was grounded within hours of the first strike.",
-      "The phone calls made from the planes changed how hijackings are responded to forever.",
-      "A field in Pennsylvania became a crash site after passengers fought back against the hijackers.",
-      "Both towers had been attacked before — a truck bomb in the basement, years earlier.",
-      "Nearly 3,000 people died in attacks on New York and Washington on the same morning.",
-      "On September 11, 2001, al-Qaeda hijackers flew commercial planes into the World Trade Center."
-    ]
-  },
-  {
-    "subject": "The Amazon River",
-    "category": "Place",
-    "clues": [
-      "It discharges more fresh water into the ocean than any other river on Earth.",
-      "Its mouth is so wide that early explorers did not realize it was a river.",
-      "Some stretches have no bridge crossing them despite running through multiple countries.",
-      "Pink dolphins are among the species found only in its basin.",
-      "It flows through the largest tropical rainforest on the planet.",
-      "This South American river is the largest by water volume in the world."
-    ]
-  },
-  {
-    "subject": "Pablo Picasso",
-    "category": "Person",
-    "clues": [
-      "His full baptismal name contained 23 words.",
-      "He kept the full name of the woman who inspired his most politically charged painting secret for years.",
-      "He was questioned by police after the Mona Lisa was stolen — he had bought stolen art from the same thief.",
-      "He created over 20,000 works across painting, sculpture, ceramics, and printmaking.",
-      "His 1937 painting depicting a bombing in the Basque Country became the most famous anti-war artwork ever made.",
-      "This Spanish artist co-founded Cubism and painted Guernica."
-    ]
-  },
-  {
-    "subject": "Titanic",
-    "category": "Event",
-    "clues": [
-      "A lifeboat drill scheduled for the morning of the sinking was cancelled.",
-      "The ship received six iceberg warnings the day it sank — none caused a course change.",
-      "A nearby ship saw the distress flares but did not respond in time.",
-      "Third-class passengers were physically prevented from reaching the upper decks.",
-      "Over 1,500 people died when it sank on its maiden voyage in April 1912.",
-      "The RMS Titanic struck an iceberg and sank in the North Atlantic on its first journey."
-    ]
-  },
-  {
-    "subject": "Bob Dylan",
-    "category": "Person",
-    "clues": [
-      "He changed his name before recording his first album, borrowing it from a Welsh poet.",
-      "He was booed by his own audience when he plugged in an electric guitar for the first time.",
-      "His manager famously refused to let him appear on The Ed Sullivan Show over a song choice.",
-      "He accepted his Nobel Prize in Literature months late and sent someone else to collect it.",
-      "His 1965 song 'Like a Rolling Stone' changed what a pop single was allowed to be.",
-      "This American singer-songwriter won the Nobel Prize in Literature in 2016."
-    ]
-  },
-  {
-    "subject": "The Colosseum",
-    "category": "Place",
-    "clues": [
-      "It was built using labor and materials seized after the sacking of Jerusalem.",
-      "Its retractable awning system required 1,000 sailors to operate.",
-      "It could be flooded to stage mock naval battles.",
-      "It held between 50,000 and 80,000 spectators and had 80 entrance arches.",
-      "Gladiatorial combat and public executions were held here for four centuries.",
-      "This ancient Roman amphitheater in the center of Rome is the largest ever built."
-    ]
-  },
-  {
-    "subject": "Frida Kahlo",
-    "category": "Person",
-    "clues": [
-      "She contracted polio at age six, leaving one leg thinner than the other.",
-      "She began painting seriously while bedridden after a bus accident shattered her spine.",
-      "She married the same man twice — each time the relationship was marked by mutual infidelity.",
-      "Her unibrow and traditional Tehuana dress were deliberate political statements.",
-      "More than a third of her 143 paintings are self-portraits.",
-      "This Mexican painter is one of the most recognizable artists of the 20th century."
-    ]
-  },
-  {
-    "subject": "The Moon Landing",
-    "category": "Event",
-    "clues": [
-      "A president prepared a speech in advance in case the astronauts did not make it back.",
-      "The computer guiding the landing had less processing power than a modern pocket calculator.",
-      "One astronaut remained alone in the orbiting module while the others descended.",
-      "The mission was named after the Greek god of the sun.",
-      "Neil Armstrong and Buzz Aldrin spent 21 hours on the lunar surface in July 1969.",
-      "Apollo 11 landed humans on the Moon for the first time on July 20, 1969."
-    ]
-  },
-  {
-    "subject": "Pulp Fiction",
-    "category": "Work",
-    "clues": [
-      "Its timeline is deliberately scrambled — the last scene chronologically appears near the middle.",
-      "A $5 milkshake becomes a point of serious conversation between two hitmen.",
-      "John Travolta's career was considered finished before this film brought him back.",
-      "It won the Palme d'Or at Cannes and lost the Oscar to Forrest Gump.",
-      "Uma Thurman plays a gangster's wife who nearly dies of a drug overdose.",
-      "Quentin Tarantino directed this 1994 crime anthology film."
-    ]
-  },
-  {
-    "subject": "Charles Darwin",
-    "category": "Person",
-    "clues": [
-      "He originally trained to become a clergyman before science consumed him.",
-      "He spent five years on a naval survey ship, collecting specimens across South America and the Pacific.",
-      "He sat on his theory for 20 years before publishing, fearing the reaction.",
-      "A letter from a fellow naturalist with the same idea forced him to finally publish.",
-      "His 1859 book introduced the mechanism of natural selection to explain species change.",
-      "This English naturalist wrote On the Origin of Species."
-    ]
-  },
-  {
-    "subject": "Chernobyl",
-    "category": "Event",
-    "clues": [
-      "The explosion was partly caused by a safety test that was supposed to make the reactor safer.",
-      "An entire city of 50,000 people was evacuated with three hours notice and never resettled.",
-      "The first responders were not told what they were walking into.",
-      "A so-called 'liquidator' workforce of 600,000 was deployed over years to contain the damage.",
-      "A 2019 HBO miniseries dramatized the disaster and the Soviet government's cover-up.",
-      "Reactor No. 4 at a Ukrainian nuclear plant exploded in April 1986 in the world's worst nuclear accident."
-    ]
-  },
-  {
-    "subject": "Hamlet",
-    "category": "Work",
-    "clues": [
-      "It is the most performed play in history and has been translated into every written language.",
-      "The ghost appears in the first scene — before the protagonist does.",
-      "It contains more famous quotes than almost any other single work in English.",
-      "The play within the play is used as a trap to catch a murderer.",
-      "A Danish prince's decision to avenge his father's murder drives the entire plot.",
-      "This is Shakespeare's longest play and one of the most analyzed works in literary history."
-    ]
-  },
-  {
-    "subject": "Usain Bolt",
-    "category": "Person",
-    "clues": [
-      "He ate McDonald's chicken nuggets every day at the 2008 Beijing Olympics.",
-      "He celebrated before crossing the finish line in his world record 100m run and still set the record.",
-      "He is 6'5\" — considered too tall by coaches who said he would never be a sprinter.",
-      "He won three gold medals at three consecutive Olympics.",
-      "His world record of 9.58 seconds in the 100m has stood since 2009.",
-      "This Jamaican sprinter is the fastest human ever recorded."
-    ]
-  },
-  {
-    "subject": "The Great Fire of London",
-    "category": "Event",
-    "clues": [
-      "It started in a bakery on Pudding Lane in the early hours of the morning.",
-      "Only six deaths were officially recorded, though historians believe the real number was higher.",
-      "It destroyed 13,200 houses and 87 churches across four days.",
-      "The fire created the conditions for Christopher Wren to rebuild the city's skyline.",
-      "It effectively ended the plague that had been killing Londoners for the previous year.",
-      "This catastrophic fire burned through the medieval city of London in September 1666."
-    ]
-  },
-  {
-    "subject": "Netflix",
-    "category": "Work",
-    "clues": [
-      "It started as a DVD-by-mail service with no late fees — a direct attack on Blockbuster.",
-      "Blockbuster was offered the chance to buy it for $50 million and declined.",
-      "It began producing its own content after a Danish political drama showed it was possible.",
-      "Its recommendation algorithm was the subject of a million-dollar public competition.",
-      "It went from mailing DVDs to becoming the world's dominant streaming service.",
-      "This American company redefined how television and film are distributed and consumed globally."
-    ]
-  },
-  {
-    "subject": "Marie Curie",
-    "category": "Person",
-    "clues": [
-      "She had to sit behind a screen at scientific conferences because women were not officially allowed.",
-      "She was the first person — not first woman, first person — to win Nobel Prizes in two different sciences.",
-      "Her notebooks are still radioactive and are stored in lead-lined boxes.",
-      "She personally drove ambulances equipped with X-ray machines to the front lines in World War I.",
-      "She discovered two new elements: polonium, named after her homeland, and radium.",
-      "This Polish-French physicist was the first woman to win a Nobel Prize."
-    ]
-  },
-  {
-    "subject": "The Dark Knight",
-    "category": "Work",
-    "clues": [
-      "Heath Ledger locked himself in a hotel room for six weeks to prepare for his role.",
-      "An IMAX camera was destroyed during the filming of the bank robbery scene.",
-      "The actor playing the villain died before the film was released.",
-      "It was the first superhero film to be taken seriously as a crime drama.",
-      "The Joker becomes Gotham's primary threat as Batman tries to hold the city together.",
-      "Christopher Nolan directed this 2008 Batman film, widely considered one of the greatest superhero films ever made."
-    ]
-  },
-  {
-    "subject": "Pompeii",
-    "category": "Place",
-    "clues": [
-      "Its residents had no concept or word for what a volcano was — they thought it was a mountain.",
-      "Plaster casts of its victims were made by filling the voids their bodies left in hardened ash.",
-      "Intact election graffiti on its walls shows campaigns that were still running when the city died.",
-      "A fast food street culture with over 80 thermopoliae — ancient snack bars — has been excavated.",
-      "It was buried so quickly that loaves of bread were found still in ovens.",
-      "This Roman city near Naples was buried under volcanic ash by Vesuvius in 79 AD and preserved almost perfectly."
-    ]
-  },
-  {
-    "subject": "The Beatles",
-    "category": "Person",
-    "clues": [
-      "They were rejected by every major record label in London before signing with a small classical imprint.",
-      "Their last live performance was on a rooftop in London — unannounced, in the middle of a workday.",
-      "They spent more studio time on one album than the entire first decade of rock and roll combined.",
-      "John Lennon was arrested in Hamburg for arson before they were famous.",
-      "They appeared on The Ed Sullivan Show in 1964 to an audience of 73 million people.",
-      "This British band from Liverpool is the best-selling music act in history."
-    ]
-  },
-  {
-    "subject": "Avatar",
-    "category": "Work",
-    "clues": [
-      "Its director spent years developing technology that didn't yet exist before he could make it.",
-      "It was rejected by every studio before one agreed to fund it — on the condition it was scaled back.",
-      "The language spoken by its alien species was created by a professional linguist.",
-      "It held the record as the highest-grossing film of all time for a decade.",
-      "A planet called Pandora and its indigenous Na'vi people are at the center of the story.",
-      "James Cameron directed this 2009 science fiction film, the highest-grossing film ever made at the time."
+      "It happened on a ship's very first journey.",
+      "It sank after hitting a large block of ice in the ocean.",
+      "A 1997 Leonardo DiCaprio film told a love story set during this disaster.",
+      "More than 1,500 people died because there were not enough lifeboats.",
+      "It happened in the North Atlantic Ocean in April 1912.",
+      "This famous ship sank on its maiden voyage and became one of history's most famous disasters."
     ]
   },
   {
     "subject": "The Eiffel Tower",
     "category": "Place",
+    "difficulty": "easy",
     "clues": [
-      "It was supposed to be demolished after 20 years but was saved because it made a useful radio antenna.",
-      "It grows taller in summer — thermal expansion adds up to 15cm in the heat.",
-      "Its original color was reddish-brown — it has been repainted in a yellow-brown shade 19 times since.",
-      "Over 300 workers and 18,038 pieces of iron were used to build it in just over two years.",
-      "When it was built in 1889, it was the tallest man-made structure in the world.",
-      "This iron lattice tower on the Champ de Mars in Paris is the most visited paid monument on Earth."
+      "It was built for a world's fair in 1889.",
+      "It is made entirely of iron and painted a brownish color.",
+      "It has a restaurant and observation deck near the top.",
+      "Millions of tourists visit it every year to take the same photo.",
+      "It lights up at night and is in the center of one of Europe's most famous cities.",
+      "This iconic iron tower is the most recognizable symbol of Paris, France."
     ]
   },
   {
-    "subject": "Ayrton Senna",
-    "category": "Person",
-    "clues": [
-      "He once lapped an entire field in wet conditions at Monaco in a race that was later red-flagged.",
-      "He described entering a trance-like state while driving, which frightened him enough to lift off.",
-      "His rivalry with Alain Prost ended with them deliberately colliding twice in championship deciders.",
-      "He died at a corner called Tamburello at Imola — a crash watched live on television across the world.",
-      "He won three Formula 1 World Championships despite driving for a less dominant team in two of them.",
-      "This Brazilian racing driver is widely considered the greatest Formula 1 driver of all time."
-    ]
-  },
-  {
-    "subject": "1984",
+    "subject": "Harry Potter",
     "category": "Work",
+    "difficulty": "easy",
     "clues": [
-      "It was written while the author was dying of tuberculosis on a remote Scottish island.",
-      "The author submitted it under a different title — his publisher changed it.",
-      "Its appendix is written in past tense — implying the regime it depicts eventually fell.",
-      "It invented words that entered everyday language: doublethink, thoughtcrime, unperson.",
-      "Big Brother watches a man named Winston Smith who begins secretly rebelling against a totalitarian state.",
-      "George Orwell wrote this 1949 novel, one of the most influential dystopias ever written."
+      "Its main character finds out on his 11th birthday that he is a wizard.",
+      "The story takes place mostly at a school called Hogwarts.",
+      "A lightning bolt scar on the hero's forehead is a key detail.",
+      "It was written by a British author who came up with the idea on a delayed train.",
+      "Daniel Radcliffe played the lead character in eight films.",
+      "This is J.K. Rowling's series about a young wizard who must defeat the dark lord Voldemort."
+    ]
+  },
+  {
+    "subject": "The Moon Landing",
+    "category": "Event",
+    "difficulty": "easy",
+    "clues": [
+      "It happened in the summer of 1969.",
+      "Two men walked on a surface while a third waited in orbit above them.",
+      "The words 'one small step for man' were spoken live on television.",
+      "It was part of a space race between the United States and the Soviet Union.",
+      "Hundreds of millions of people watched it live on television.",
+      "NASA's Apollo 11 mission landed the first humans on the Moon on July 20, 1969."
+    ]
+  },
+  {
+    "subject": "Leonardo da Vinci",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "He filled notebooks with drawings of flying machines, anatomy, and inventions centuries before they existed.",
+      "He painted on a wall inside a Milan dining hall — and the paint started peeling almost immediately.",
+      "He was left-handed and wrote his notes in mirror script.",
+      "He painted the most famous portrait in the world — a woman with no eyebrows and a mysterious smile.",
+      "He was born in Italy in 1452 and is considered the ultimate Renaissance man.",
+      "This Italian genius painted the Mona Lisa and The Last Supper."
+    ]
+  },
+  {
+    "subject": "The Olympics",
+    "category": "Event",
+    "difficulty": "easy",
+    "clues": [
+      "It began in ancient Greece over 2,700 years ago.",
+      "Athletes from almost every country in the world compete in it.",
+      "Its symbol is five interlocking rings in different colors.",
+      "It alternates every two years between a summer and winter version.",
+      "The winner of each event receives a gold medal.",
+      "This international sporting competition is held every four years and is the world's biggest athletic event."
+    ]
+  },
+  {
+    "subject": "Cleopatra",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "She ruled one of the ancient world's most powerful kingdoms.",
+      "She was actually Greek by ancestry, not from the country she ruled.",
+      "She formed powerful romantic alliances with Julius Caesar and Mark Antony.",
+      "She is said to have died from a snake bite.",
+      "She was the last pharaoh before her kingdom was taken over by Rome.",
+      "This queen of ancient Egypt is one of the most famous women in history."
+    ]
+  },
+  {
+    "subject": "The Great Wall of China",
+    "category": "Place",
+    "difficulty": "easy",
+    "clues": [
+      "It was built over many centuries by emperors to protect their kingdom.",
+      "Millions of workers — including soldiers and prisoners — built it by hand.",
+      "It runs through mountains, deserts, and grasslands across northern China.",
+      "It is one of the most visited tourist attractions on Earth.",
+      "Despite popular myth, it cannot actually be seen from space with the naked eye.",
+      "This ancient stone wall stretching thousands of miles is one of the greatest construction projects in human history."
+    ]
+  },
+  {
+    "subject": "Usain Bolt",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "He grew up in a small town in Jamaica and was a natural athlete from childhood.",
+      "He once celebrated before crossing the finish line — and still set a world record.",
+      "He won gold medals at three consecutive Olympic Games.",
+      "His world record of 9.58 seconds in the 100 meters has never been beaten.",
+      "He is so much faster than everyone else that his races are often decided before the finish line.",
+      "This Jamaican sprinter is the fastest human being ever recorded."
+    ]
+  },
+  {
+    "subject": "World War II",
+    "category": "Event",
+    "difficulty": "easy",
+    "clues": [
+      "It involved countries from almost every continent on Earth.",
+      "It began in Europe in 1939 and ended in 1945.",
+      "The Holocaust — the murder of six million Jewish people — happened during this conflict.",
+      "It ended in the Pacific after the United States dropped two atomic bombs on Japan.",
+      "It was the deadliest conflict in human history, killing an estimated 70 to 85 million people.",
+      "This global war fought between 1939 and 1945 remains the largest and most destructive in human history."
+    ]
+  },
+  {
+    "subject": "The iPhone",
+    "category": "Work",
+    "difficulty": "easy",
+    "clues": [
+      "Before it existed, phones had physical keyboards and tiny screens.",
+      "It was announced by a CEO in jeans and a black turtleneck on a stage in San Francisco.",
+      "It combined a phone, a music player, and an internet browser into one device.",
+      "Its app store created an entirely new economy of software developers.",
+      "It completely changed how humans interact with technology in less than a decade.",
+      "Apple's Steve Jobs unveiled this revolutionary smartphone in 2007."
+    ]
+  },
+  {
+    "subject": "Nelson Mandela",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "He spent 27 years in prison for opposing a racist government system.",
+      "He was held on a small island where he broke rocks in a quarry.",
+      "When he was released in 1990, millions of people watched it live on television.",
+      "He shared the Nobel Peace Prize in 1993.",
+      "He became his country's first democratically elected president.",
+      "This South African leader ended apartheid and became a global symbol of forgiveness and freedom."
+    ]
+  },
+  {
+    "subject": "Minecraft",
+    "category": "Work",
+    "difficulty": "easy",
+    "clues": [
+      "It was created by a single Swedish developer and sold from a basic website.",
+      "Players collect materials and use them to build almost anything they can imagine.",
+      "It has no fixed goal — you can survive, create, or explore endlessly.",
+      "It is the best-selling video game of all time with over 300 million copies sold.",
+      "Its blocky visual style is now one of the most recognized aesthetics in the world.",
+      "This sandbox video game created by Markus Persson lets players build anything out of blocks."
+    ]
+  },
+  {
+    "subject": "The Amazon Rainforest",
+    "category": "Place",
+    "difficulty": "easy",
+    "clues": [
+      "It produces so much oxygen it is sometimes called the lungs of the Earth.",
+      "It is home to more species of plant and animal than anywhere else on the planet.",
+      "It covers large parts of Brazil and several neighboring South American countries.",
+      "Deforestation is destroying large sections of it every year.",
+      "The world's largest river runs through it.",
+      "This vast tropical forest in South America is the largest rainforest on Earth."
     ]
   },
   {
     "subject": "Lionel Messi",
     "category": "Person",
+    "difficulty": "easy",
     "clues": [
-      "He was diagnosed with a growth hormone deficiency at 10 — Barcelona paid for his treatment in exchange for signing him.",
-      "He scored all five goals in a Champions League match against Bayer Leverkusen in 2012.",
-      "He retired from international football after losing the 2016 Copa América final — then came back.",
-      "He won the Ballon d'Or eight times — more than any other footballer in history.",
-      "He finally won the World Cup with Argentina in 2022 after three previous final appearances.",
-      "This Argentine footballer is widely considered the greatest player in the history of the sport."
+      "He grew up in Argentina and moved to Spain as a child to join a famous football club.",
+      "He won the Ballon d'Or — the award for the world's best player — eight times.",
+      "He spent most of his career at FC Barcelona.",
+      "He finally won the World Cup with Argentina in 2022 after three previous attempts.",
+      "Many people consider him the greatest footballer who ever lived.",
+      "This Argentine forward is widely regarded as the best football player in history."
     ]
   },
   {
-    "subject": "Hiroshima",
-    "category": "Event",
-    "clues": [
-      "The city was specifically chosen because it had not yet been bombed — to measure the weapon's full effect.",
-      "Shadows of vaporized people were burned permanently into walls and steps.",
-      "A wristwatch recovered from the rubble stopped at 8:15 a.m. — the exact moment of detonation.",
-      "Survivors of both Hiroshima and Nagasaki faced discrimination in Japan for decades afterward.",
-      "The bomb was dropped from a B-29 named Enola Gay, after the pilot's mother.",
-      "An atomic bomb was dropped on this Japanese city on August 6, 1945, killing over 70,000 people instantly."
-    ]
-  },
-  {
-    "subject": "The Louvre",
+    "subject": "The Pyramids of Giza",
     "category": "Place",
+    "difficulty": "easy",
     "clues": [
-      "It was a royal fortress and prison before it became a museum during the French Revolution.",
-      "It takes nine months to walk past every work in its collection if you spend 30 seconds on each.",
-      "Napoleon used one of its grand halls as his private apartment.",
-      "Its controversial glass pyramid entrance was deeply hated when it opened in 1989.",
-      "It is home to the Mona Lisa, the Venus de Milo, and the Winged Victory of Samothrace.",
-      "This museum in Paris is the most visited art museum in the world."
+      "They were built as tombs for rulers of an ancient civilization.",
+      "The largest one was the tallest man-made structure in the world for nearly 4,000 years.",
+      "They were built without modern machinery — exactly how is still debated.",
+      "A large stone sculpture with a human head and lion's body sits nearby.",
+      "They are located on the edge of a major African city beside a famous river.",
+      "These ancient stone monuments near Cairo, Egypt are one of the Seven Wonders of the Ancient World."
     ]
   },
   {
-    "subject": "Muhammad Ali",
-    "category": "Person",
+    "subject": "Breaking Bad",
+    "category": "Work",
+    "difficulty": "easy",
     "clues": [
-      "He threw his Olympic gold medal into a river after being refused service at a whites-only restaurant.",
-      "He was stripped of his heavyweight title and banned from boxing for three years for refusing the Vietnam draft.",
-      "He predicted the round his opponent would fall in — and was correct so often it became expected.",
-      "His fight with Joe Frazier in Manila in 1975 is considered the most brutal boxing match ever recorded.",
-      "He lit the Olympic flame at the Atlanta Games in 1996, his hands visibly trembling from Parkinson's.",
-      "Born Cassius Clay, this American boxer is widely considered the greatest heavyweight of all time."
+      "Its main character starts out as a mild-mannered high school teacher.",
+      "He begins making drugs after being diagnosed with terminal cancer.",
+      "It is set in the desert landscape of New Mexico.",
+      "The main character uses the criminal alias Heisenberg.",
+      "Bryan Cranston won four Emmy Awards for playing Walter White.",
+      "This AMC television series follows a chemistry teacher who builds a methamphetamine empire."
+    ]
+  },
+  {
+    "subject": "Marie Curie",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "She grew up in Poland at a time when women were not allowed to attend university there.",
+      "She moved to Paris to study and worked in conditions so cold her water bottle froze at her desk.",
+      "She discovered two new elements and named one of them after her home country.",
+      "She was the first person ever to win Nobel Prizes in two different scientific fields.",
+      "Her notebooks are still so radioactive they are kept in lead-lined boxes.",
+      "This Polish-French scientist was the first woman to win a Nobel Prize."
+    ]
+  },
+  {
+    "subject": "Instagram",
+    "category": "Work",
+    "difficulty": "easy",
+    "clues": [
+      "It was launched in 2010 and reached one million users in its first two months.",
+      "It was originally only available on iPhone.",
+      "Facebook bought it for one billion dollars in 2012 — considered a bargain within years.",
+      "It changed how people share food, travel, and personal moments with strangers.",
+      "Its square photo format and filters defined a visual aesthetic for an entire decade.",
+      "This photo and video sharing app is one of the most used social media platforms in the world."
     ]
   },
   {
     "subject": "Fairuz",
     "category": "Person",
+    "difficulty": "easy",
     "clues": [
-      "She was discovered singing in a government radio choir as a teenager in Beirut.",
-      "Her morning broadcasts became a ritual — entire cities would stop to listen.",
-      "She refused to perform during the Lebanese Civil War, saying she would only sing for a united Lebanon.",
-      "She collaborated with the Rahbani brothers for decades, one of whom she married.",
-      "Her voice became so synonymous with Lebanon that she is called the country's ambassador to the stars.",
-      "This Lebanese singer is considered the greatest Arab vocalist of the 20th century."
+      "She was discovered as a teenager singing in a radio choir in Beirut.",
+      "Her voice was played on the radio every morning — entire cities would stop to listen.",
+      "She refused to perform during the Lebanese Civil War.",
+      "She is called the ambassador of Lebanon to the stars.",
+      "Her songs are still heard in every Arab home, café, and taxi decades after they were recorded.",
+      "This Lebanese singer is the most beloved Arab vocalist of the 20th century."
     ]
   },
   {
-    "subject": "Chichen Itza",
-    "category": "Place",
+    "subject": "Chernobyl",
+    "category": "Event",
+    "difficulty": "easy",
     "clues": [
-      "During the spring and autumn equinoxes, a shadow shaped like a serpent descends its main pyramid.",
-      "Its ballcourt is the largest in the ancient Americas — losers may have been ritually sacrificed.",
-      "It was not fully excavated until the 20th century, though it had been a tourist destination for Spanish conquistadors.",
-      "Its main pyramid has 365 steps — one for each day of the solar calendar.",
-      "It was a major city of the Maya civilization in what is now Mexico.",
-      "This ancient Mayan city in the Yucatán Peninsula is one of the New Seven Wonders of the World."
+      "It happened because of a safety test that went catastrophically wrong.",
+      "An entire city of 50,000 people was abandoned overnight and never returned to.",
+      "The explosion sent radioactive material across large parts of Europe.",
+      "A 2019 HBO series dramatized the disaster and became one of the highest rated TV shows ever made.",
+      "It happened in 1986 in what is now Ukraine, during the era of the Soviet Union.",
+      "This nuclear power plant explosion is the worst nuclear disaster in human history."
+    ]
+  },
+  {
+    "subject": "The Colosseum",
+    "category": "Place",
+    "difficulty": "easy",
+    "clues": [
+      "It was built over 2,000 years ago and could hold up to 80,000 spectators.",
+      "Gladiators fought each other and wild animals inside it.",
+      "It is still standing today despite earthquakes and centuries of use as a stone quarry.",
+      "It has 80 entrance arches and could be filled or emptied of crowds in minutes.",
+      "It is the most visited ancient monument in the world.",
+      "This massive ancient Roman arena in the center of Rome hosted gladiatorial combat for centuries."
+    ]
+  },
+  {
+    "subject": "Frida Kahlo",
+    "category": "Person",
+    "difficulty": "easy",
+    "clues": [
+      "She was badly injured in a bus accident as a teenager and began painting while recovering in bed.",
+      "She is famous for her self-portraits and her distinctive unibrow.",
+      "She was Mexican and her paintings often referenced indigenous culture and personal pain.",
+      "She married the famous muralist Diego Rivera — twice.",
+      "Her face is now one of the most reproduced images in the history of art.",
+      "This Mexican painter is one of the most famous female artists of the 20th century."
+    ]
+  },
+  {
+    "subject": "The Berlin Wall",
+    "category": "Event",
+    "difficulty": "easy",
+    "clues": [
+      "It was built overnight in 1961, separating families who woke up on different sides.",
+      "Guards were ordered to shoot anyone trying to cross it illegally.",
+      "Ronald Reagan stood near it in 1987 and demanded it be torn down.",
+      "When it fell in November 1989, crowds gathered and began breaking it apart with hammers.",
+      "Its fall marked the end of the Cold War and the reunification of a divided country.",
+      "This concrete barrier divided East and West Germany — and the city of Berlin — for 28 years."
+    ]
+  },
+  {
+    "subject": "SpongeBob SquarePants",
+    "category": "Work",
+    "difficulty": "easy",
+    "clues": [
+      "It is set in an underwater city called Bikini Bottom.",
+      "The main character works as a fry cook at a fast food restaurant called the Krusty Krab.",
+      "His best friend is a pink starfish named Patrick.",
+      "It has been running since 1999 and has spawned movies, musicals, and theme park rides.",
+      "Its creator was a marine biology teacher who wanted to make a cartoon about ocean life.",
+      "This Nickelodeon animated series follows a cheerful sea sponge and is one of the most watched cartoons ever made."
+    ]
+  },
+  {
+    "subject": "The Amazon River",
+    "category": "Place",
+    "difficulty": "easy",
+    "clues": [
+      "It flows through the largest tropical rainforest on Earth.",
+      "It releases more fresh water into the ocean than any other river in the world.",
+      "Pink dolphins are one of the unique animals found in its waters.",
+      "It runs through Brazil and several other South American countries.",
+      "Its mouth is so wide that early explorers didn't realize it was a river.",
+      "This South American river is the largest river in the world by volume of water."
+    ]
+  },
+  {
+    "subject": "The Hunger Games",
+    "category": "Work",
+    "difficulty": "easy",
+    "clues": [
+      "It is set in a future version of North America divided into districts controlled by a wealthy Capitol.",
+      "Every year, two young people from each district are chosen to fight to the death on live television.",
+      "The main character volunteers to take her younger sister's place.",
+      "Jennifer Lawrence played the lead character in four films.",
+      "The protagonist's weapon of choice is a bow and arrow.",
+      "This Suzanne Collins novel series follows Katniss Everdeen in a dystopian society that forces children to fight."
+    ]
+  },
+  {
+    "subject": "Machu Picchu",
+    "category": "Place",
+    "difficulty": "easy",
+    "clues": [
+      "It sits so high in the mountains that clouds pass through it.",
+      "It was built by the Inca civilization without the use of wheels or iron tools.",
+      "It was unknown to the outside world until an American explorer found it in 1911.",
+      "Its stones fit so perfectly together that no mortar was needed.",
+      "It is one of the most visited ancient sites in South America.",
+      "This Incan citadel high in the Peruvian Andes is one of the New Seven Wonders of the World."
     ]
   }
 ]

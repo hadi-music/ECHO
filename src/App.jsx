@@ -25,33 +25,49 @@ function normalize(str) {
 // Words that are never enough on their own to identify an answer
 const FILLER_WORDS = new Set(["the", "a", "an", "of", "in", "on", "at", "to", "and", "or", "de", "la", "le", "von", "van", "el", "al"]);
 
+function levenshtein(a, b) {
+    if (a === b) return 0;
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+        const curr = [i];
+        for (let j = 1; j <= b.length; j++) {
+            curr[j] = a[i - 1] === b[j - 1]
+                ? prev[j - 1]
+                : 1 + Math.min(prev[j - 1], prev[j], curr[j - 1]);
+        }
+        prev = curr;
+    }
+    return prev[b.length];
+}
+
 function isCorrect(guess, subject) {
     const g = normalize(guess);
     const s = normalize(subject);
 
-    // Must be at least 3 characters
     if (g.length < 3) return false;
-
-    // Exact match (after normalization)
     if (g === s) return true;
 
-    // Split into words for smarter matching
+    // Full-string Levenshtein: up to 2 edits for subjects under 8 chars, 3 for longer
+    const tol = s.length < 8 ? 2 : 3;
+    if (levenshtein(g, s) <= tol) return true;
+
+    // Close substring match — guess inside subject or vice versa
+    if (g.length >= 4 && s.includes(g)) return true;
+    if (s.length >= 4 && g.includes(s)) return true;
+
+    // Word-level matching for multi-word subjects
     const gWords = g.split(/\s+/).filter(w => w.length > 0);
     const sWords = s.split(/\s+/).filter(w => w.length > 0);
-
-    // Guess must cover a meaningful portion: at least half the subject's words
-    // AND all guessed words must appear in the subject
     const gNonFiller = gWords.filter(w => !FILLER_WORDS.has(w));
     const sNonFiller = sWords.filter(w => !FILLER_WORDS.has(w));
 
     if (gNonFiller.length === 0) return false;
 
-    // All non-filler guess words must exist in subject's non-filler words
     const allMatch = gNonFiller.every(gw => sNonFiller.some(sw => sw === gw || sw.startsWith(gw) || gw.startsWith(sw)));
-
     if (!allMatch) return false;
 
-    // Guess must cover at least half the subject's meaningful words
     const coverage = gNonFiller.length / Math.max(sNonFiller.length, 1);
     return coverage >= 0.5;
 }
@@ -289,7 +305,7 @@ export default function App() {
 
                         <div style={{ display: "flex", gap: "5px", marginBottom: "24px" }}>
                             {[1, 2, 3, 4, 5, 6].map(i => (
-                                <div key={i} style={{ flex: 1, height: "2px", background: i <= revealedCount ? cfg.color : "#1e1e1e", transition: "background 0.3s" }} />
+                                <div key={i} style={{ flex: 1, height: "2px", backgroundColor: i <= revealedCount ? cfg.color : "#1e1e1e", transition: "background-color 0.3s" }} />
                             ))}
                         </div>
 
