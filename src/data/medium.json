@@ -1,19 +1,9 @@
 [
   {
-    "subject": "Michael Jackson",
-    "category": "Person",
-    "clues": [
-      "He began performing professionally before most children start school.",
-      "His signature move was inspired by a street dance style he saw in a music video.",
-      "He purchased the Beatles' song catalog in 1985 for roughly $47 million.",
-      "He lived on a private estate in California he named after a fictional place from a book.",
-      "His 1982 album remains the best-selling album of all time.",
-      "He was the lead vocalist of the Jackson 5 before his solo career made him the King of Pop."
-    ]
-  },
-  {
     "subject": "The Shining",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-06",
     "clues": [
       "The author of the source novel hated this adaptation so much he later made his own version.",
       "The hedge maze in the film does not exist in the original book.",
@@ -24,8 +14,24 @@
     ]
   },
   {
+    "subject": "Michael Jackson",
+    "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-07",
+    "clues": [
+      "He began performing professionally before most children start school.",
+      "His signature move was inspired by a street dance style he saw in a music video.",
+      "He purchased the Beatles' song catalog in 1985 for roughly $47 million.",
+      "He lived on a private estate in California he named after a fictional place from a book.",
+      "His 1982 album remains the best-selling album of all time.",
+      "He was the lead vocalist of the Jackson 5 before his solo career made him the King of Pop."
+    ]
+  },
+  {
     "subject": "9/11",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-06-08",
     "clues": [
       "Air traffic across an entire continent was grounded within hours of the first strike.",
       "The phone calls made from the planes changed how hijackings are responded to forever.",
@@ -38,6 +44,8 @@
   {
     "subject": "The Amazon River",
     "category": "Place",
+    "difficulty": "medium",
+    "date": "2026-06-09",
     "clues": [
       "It discharges more fresh water into the ocean than any other river on Earth.",
       "Its mouth is so wide that early explorers did not realize it was a river.",
@@ -50,6 +58,8 @@
   {
     "subject": "Pablo Picasso",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-10",
     "clues": [
       "His full baptismal name contained 23 words.",
       "He kept the full name of the woman who inspired his most politically charged painting secret for years.",
@@ -62,6 +72,8 @@
   {
     "subject": "Titanic",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-06-11",
     "clues": [
       "A lifeboat drill scheduled for the morning of the sinking was cancelled.",
       "The ship received six iceberg warnings the day it sank — none caused a course change.",
@@ -74,6 +86,8 @@
   {
     "subject": "Bob Dylan",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-12",
     "clues": [
       "He changed his name before recording his first album, borrowing it from a Welsh poet.",
       "He was booed by his own audience when he plugged in an electric guitar for the first time.",
@@ -86,6 +100,8 @@
   {
     "subject": "The Colosseum",
     "category": "Place",
+    "difficulty": "medium",
+    "date": "2026-06-13",
     "clues": [
       "It was built using labor and materials seized after the sacking of Jerusalem.",
       "Its retractable awning system required 1,000 sailors to operate.",
@@ -98,6 +114,8 @@
   {
     "subject": "Frida Kahlo",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-14",
     "clues": [
       "She contracted polio at age six, leaving one leg thinner than the other.",
       "She began painting seriously while bedridden after a bus accident shattered her spine.",
@@ -110,6 +128,8 @@
   {
     "subject": "The Moon Landing",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-06-15",
     "clues": [
       "A president prepared a speech in advance in case the astronauts did not make it back.",
       "The computer guiding the landing had less processing power than a modern pocket calculator.",
@@ -122,6 +142,8 @@
   {
     "subject": "Pulp Fiction",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-16",
     "clues": [
       "Its timeline is deliberately scrambled — the last scene chronologically appears near the middle.",
       "A $5 milkshake becomes a point of serious conversation between two hitmen.",
@@ -134,6 +156,8 @@
   {
     "subject": "Charles Darwin",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-17",
     "clues": [
       "He originally trained to become a clergyman before science consumed him.",
       "He spent five years on a naval survey ship, collecting specimens across South America and the Pacific.",
@@ -146,6 +170,8 @@
   {
     "subject": "Chernobyl",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-06-18",
     "clues": [
       "The explosion was partly caused by a safety test that was supposed to make the reactor safer.",
       "An entire city of 50,000 people was evacuated with three hours notice and never resettled.",
@@ -158,6 +184,8 @@
   {
     "subject": "Hamlet",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-19",
     "clues": [
       "It is the most performed play in history and has been translated into every written language.",
       "The ghost appears in the first scene — before the protagonist does.",
@@ -170,6 +198,8 @@
   {
     "subject": "Usain Bolt",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-20",
     "clues": [
       "He ate McDonald's chicken nuggets every day at the 2008 Beijing Olympics.",
       "He celebrated before crossing the finish line in his world record 100m run and still set the record.",
@@ -182,6 +212,8 @@
   {
     "subject": "The Great Fire of London",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-06-21",
     "clues": [
       "It started in a bakery on Pudding Lane in the early hours of the morning.",
       "Only six deaths were officially recorded, though historians believe the real number was higher.",
@@ -194,6 +226,8 @@
   {
     "subject": "Netflix",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-22",
     "clues": [
       "It started as a DVD-by-mail service with no late fees — a direct attack on Blockbuster.",
       "Blockbuster was offered the chance to buy it for $50 million and declined.",
@@ -206,6 +240,8 @@
   {
     "subject": "Marie Curie",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-23",
     "clues": [
       "She had to sit behind a screen at scientific conferences because women were not officially allowed.",
       "She was the first person — not first woman, first person — to win Nobel Prizes in two different sciences.",
@@ -218,6 +254,8 @@
   {
     "subject": "The Dark Knight",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-24",
     "clues": [
       "Heath Ledger locked himself in a hotel room for six weeks to prepare for his role.",
       "An IMAX camera was destroyed during the filming of the bank robbery scene.",
@@ -230,6 +268,8 @@
   {
     "subject": "Pompeii",
     "category": "Place",
+    "difficulty": "medium",
+    "date": "2026-06-25",
     "clues": [
       "Its residents had no concept or word for what a volcano was — they thought it was a mountain.",
       "Plaster casts of its victims were made by filling the voids their bodies left in hardened ash.",
@@ -242,6 +282,8 @@
   {
     "subject": "The Beatles",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-26",
     "clues": [
       "They were rejected by every major record label in London before signing with a small classical imprint.",
       "Their last live performance was on a rooftop in London — unannounced, in the middle of a workday.",
@@ -254,6 +296,8 @@
   {
     "subject": "Avatar",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-27",
     "clues": [
       "Its director spent years developing technology that didn't yet exist before he could make it.",
       "It was rejected by every studio before one agreed to fund it — on the condition it was scaled back.",
@@ -266,6 +310,8 @@
   {
     "subject": "The Eiffel Tower",
     "category": "Place",
+    "difficulty": "medium",
+    "date": "2026-06-28",
     "clues": [
       "It was supposed to be demolished after 20 years but was saved because it made a useful radio antenna.",
       "It grows taller in summer — thermal expansion adds up to 15cm in the heat.",
@@ -278,6 +324,8 @@
   {
     "subject": "Ayrton Senna",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-06-29",
     "clues": [
       "He once lapped an entire field in wet conditions at Monaco in a race that was later red-flagged.",
       "He described entering a trance-like state while driving, which frightened him enough to lift off.",
@@ -290,6 +338,8 @@
   {
     "subject": "1984",
     "category": "Work",
+    "difficulty": "medium",
+    "date": "2026-06-30",
     "clues": [
       "It was written while the author was dying of tuberculosis on a remote Scottish island.",
       "The author submitted it under a different title — his publisher changed it.",
@@ -302,6 +352,8 @@
   {
     "subject": "Lionel Messi",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-07-01",
     "clues": [
       "He was diagnosed with a growth hormone deficiency at 10 — Barcelona paid for his treatment in exchange for signing him.",
       "He scored all five goals in a Champions League match against Bayer Leverkusen in 2012.",
@@ -314,6 +366,8 @@
   {
     "subject": "Hiroshima",
     "category": "Event",
+    "difficulty": "medium",
+    "date": "2026-07-02",
     "clues": [
       "The city was specifically chosen because it had not yet been bombed — to measure the weapon's full effect.",
       "Shadows of vaporized people were burned permanently into walls and steps.",
@@ -326,6 +380,8 @@
   {
     "subject": "The Louvre",
     "category": "Place",
+    "difficulty": "medium",
+    "date": "2026-07-03",
     "clues": [
       "It was a royal fortress and prison before it became a museum during the French Revolution.",
       "It takes nine months to walk past every work in its collection if you spend 30 seconds on each.",
@@ -338,6 +394,8 @@
   {
     "subject": "Muhammad Ali",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-07-04",
     "clues": [
       "He threw his Olympic gold medal into a river after being refused service at a whites-only restaurant.",
       "He was stripped of his heavyweight title and banned from boxing for three years for refusing the Vietnam draft.",
@@ -350,6 +408,8 @@
   {
     "subject": "Fairuz",
     "category": "Person",
+    "difficulty": "medium",
+    "date": "2026-07-05",
     "clues": [
       "She was discovered singing in a government radio choir as a teenager in Beirut.",
       "Her morning broadcasts became a ritual — entire cities would stop to listen.",
@@ -357,18 +417,6 @@
       "She collaborated with the Rahbani brothers for decades, one of whom she married.",
       "Her voice became so synonymous with Lebanon that she is called the country's ambassador to the stars.",
       "This Lebanese singer is considered the greatest Arab vocalist of the 20th century."
-    ]
-  },
-  {
-    "subject": "Chichen Itza",
-    "category": "Place",
-    "clues": [
-      "During the spring and autumn equinoxes, a shadow shaped like a serpent descends its main pyramid.",
-      "Its ballcourt is the largest in the ancient Americas — losers may have been ritually sacrificed.",
-      "It was not fully excavated until the 20th century, though it had been a tourist destination for Spanish conquistadors.",
-      "Its main pyramid has 365 steps — one for each day of the solar calendar.",
-      "It was a major city of the Maya civilization in what is now Mexico.",
-      "This ancient Mayan city in the Yucatán Peninsula is one of the New Seven Wonders of the World."
     ]
   }
 ]

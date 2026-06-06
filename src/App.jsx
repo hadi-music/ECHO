@@ -3,26 +3,25 @@ import easyPuzzles from "./data/easy.json";
 import mediumPuzzles from "./data/medium.json";
 import hardPuzzles from "./data/hard.json";
 
-const PUZZLES = { easy: easyPuzzles, medium: mediumPuzzles, hard: hardPuzzles };
+const ALL_PUZZLES = [...easyPuzzles, ...mediumPuzzles, ...hardPuzzles];
 
 const SCORE_MAP = [1000, 800, 600, 400, 200, 100];
 const DIFF_CONFIG = {
-    easy: { label: "EASY", color: "#6bff9e", desc: "Universally known — culture, history, science." },
-    medium: { label: "MEDIUM", color: "#ffd166", desc: "Culturally significant — you've likely heard of them." },
-    hard: { label: "HARD", color: "#ff6b6b", desc: "Cult and niche — for the genuinely obsessive." }
+    easy: { label: "EASY", color: "#6bff9e" },
+    medium: { label: "MEDIUM", color: "#ffd166" },
+    hard: { label: "HARD", color: "#ff6b6b" }
 };
+const DIFFICULTIES = ["easy", "medium", "hard"];
 
-// Strip diacritics (é→e, ö→o, etc.) then lowercase and strip non-alphanumeric
 function normalize(str) {
     return str
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "") // remove combining diacritics
+        .replace(/[̀-ͯ]/g, "")
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, "")
         .trim();
 }
 
-// Words that are never enough on their own to identify an answer
 const FILLER_WORDS = new Set(["the", "a", "an", "of", "in", "on", "at", "to", "and", "or", "de", "la", "le", "von", "van", "el", "al"]);
 
 function levenshtein(a, b) {
@@ -49,15 +48,12 @@ function isCorrect(guess, subject) {
     if (g.length < 3) return false;
     if (g === s) return true;
 
-    // Full-string Levenshtein: up to 2 edits for subjects under 8 chars, 3 for longer
     const tol = s.length < 8 ? 2 : 3;
     if (levenshtein(g, s) <= tol) return true;
 
-    // Close substring match — guess inside subject or vice versa
     if (g.length >= 4 && s.includes(g)) return true;
     if (s.length >= 4 && g.includes(s)) return true;
 
-    // Word-level matching for multi-word subjects
     const gWords = g.split(/\s+/).filter(w => w.length > 0);
     const sWords = s.split(/\s+/).filter(w => w.length > 0);
     const gNonFiller = gWords.filter(w => !FILLER_WORDS.has(w));
@@ -71,14 +67,7 @@ function isCorrect(guess, subject) {
     const coverage = gNonFiller.length / Math.max(sNonFiller.length, 1);
     return coverage >= 0.5;
 }
-function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-}
+
 function warmthColor(score) {
     if (score >= 80) return { bg: "#071a10", border: "#00e06a", text: "#00e06a", label: "VERY WARM" };
     if (score >= 60) return { bg: "#141f04", border: "#99ee33", text: "#99ee33", label: "WARM" };
@@ -145,42 +134,67 @@ Respond ONLY with JSON:`;
     }
 }
 
+function getTodayDate() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function readLog(date, difficulty) {
+    try {
+        const raw = localStorage.getItem(`echo_log_${date}-${difficulty}`);
+        return raw ? JSON.parse(raw) : null;
+    } catch { return null; }
+}
+
+function writeLog(date, difficulty, entry) {
+    if (readLog(date, difficulty)) return;
+    try { localStorage.setItem(`echo_log_${date}-${difficulty}`, JSON.stringify(entry)); } catch {}
+}
+
 export default function App() {
+    const today = getTodayDate();
+
     const [phase, setPhase] = useState("intro");
-    const [difficulty, setDifficulty] = useState(null);
-    const [queue, setQueue] = useState([]);
     const [puzzle, setPuzzle] = useState(null);
     const [revealedCount, setRevealedCount] = useState(1);
     const [guess, setGuess] = useState("");
     const [wrongGuesses, setWrongGuesses] = useState([]);
     const [pendingWarmth, setPendingWarmth] = useState(false);
     const [score, setScore] = useState(0);
-    const [totalScore, setTotalScore] = useState(0);
-    const [round, setRound] = useState(0);
     const [shake, setShake] = useState(false);
     const [clueAnim, setClueAnim] = useState(false);
+    const [copied, setCopied] = useState(false);
+    const [expandedDates, setExpandedDates] = useState({});
     const inputRef = useRef(null);
 
-    function selectDifficulty(diff) {
-        setDifficulty(diff);
-        setTotalScore(0);
-        setRound(0);
-        const q = shuffle(PUZZLES[diff]);
-        startRound(q, diff);
+    const todayPuzzles = {
+        easy: ALL_PUZZLES.find(p => p.date === today && p.difficulty === "easy") ?? null,
+        medium: ALL_PUZZLES.find(p => p.date === today && p.difficulty === "medium") ?? null,
+        hard: ALL_PUZZLES.find(p => p.date === today && p.difficulty === "hard") ?? null,
+    };
+    const hasTodayPuzzles = DIFFICULTIES.some(d => todayPuzzles[d] !== null);
+
+    const archiveDates = [...new Set(
+        ALL_PUZZLES.filter(p => p.date <= today).map(p => p.date)
+    )].sort((a, b) => b.localeCompare(a));
+
+    function openArchive() {
+        setExpandedDates(prev => ({ ...prev, [today]: true }));
+        setPhase("archive");
     }
 
-    function startRound(q, diff) {
-        const usedDiff = diff || difficulty;
-        let currentQ = q;
-        if (!currentQ || currentQ.length === 0) currentQ = shuffle(PUZZLES[usedDiff]);
-        const next = currentQ[0];
-        setQueue(currentQ.slice(1));
-        setPuzzle(next);
+    function toggleDate(date) {
+        setExpandedDates(prev => ({ ...prev, [date]: !prev[date] }));
+    }
+
+    function startPuzzle(p) {
+        setPuzzle(p);
         setGuess("");
         setWrongGuesses([]);
         setRevealedCount(1);
         setClueAnim(false);
         setPendingWarmth(false);
+        setScore(0);
         setPhase("playing");
         setTimeout(() => inputRef.current?.focus(), 100);
     }
@@ -192,8 +206,14 @@ export default function App() {
         if (isCorrect(currentGuess, puzzle.subject)) {
             const earned = SCORE_MAP[revealedCount - 1];
             setScore(earned);
-            setTotalScore(t => t + earned);
-            setRound(r => r + 1);
+            writeLog(puzzle.date, puzzle.difficulty, {
+                date: puzzle.date,
+                subject: puzzle.subject,
+                difficulty: puzzle.difficulty,
+                score: earned,
+                cluesUsed: revealedCount,
+                result: "win"
+            });
             setPhase("win");
             return;
         }
@@ -203,7 +223,6 @@ export default function App() {
         setTimeout(() => setShake(false), 500);
         setPendingWarmth(true);
 
-        // Placeholder
         setWrongGuesses(w => [...w, { text: currentGuess, warmth: null, hint: null }]);
 
         const result = await getWarmth(currentGuess, puzzle.subject, puzzle.category, puzzle.clues.slice(0, revealedCount));
@@ -217,7 +236,14 @@ export default function App() {
         });
 
         if (revealedCount >= 6) {
-            setRound(r => r + 1);
+            writeLog(puzzle.date, puzzle.difficulty, {
+                date: puzzle.date,
+                subject: puzzle.subject,
+                difficulty: puzzle.difficulty,
+                score: 0,
+                cluesUsed: 6,
+                result: "lose"
+            });
             setTimeout(() => setPhase("lose"), 300);
         } else {
             setClueAnim(true);
@@ -228,7 +254,24 @@ export default function App() {
 
     function handleKey(e) { if (e.key === "Enter") handleGuess(); }
 
-    const cfg = difficulty ? DIFF_CONFIG[difficulty] : null;
+    function generateShareText() {
+        if (!puzzle) return "";
+        const dc = DIFF_CONFIG[puzzle.difficulty];
+        const isWin = phase === "win";
+        const greens = isWin ? revealedCount : 0;
+        const squares = Array.from({ length: 6 }, (_, i) => i < greens ? "🟩" : "⬜").join("");
+        return `ECHO – ${puzzle.date}\n${dc.label} ${puzzle.category}\n${squares}\nScore: ${score} · Clue ${revealedCount} of 6\nplay.echogame.com`;
+    }
+
+    async function handleShare() {
+        try {
+            await navigator.clipboard.writeText(generateShareText());
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {}
+    }
+
+    const cfg = puzzle ? DIFF_CONFIG[puzzle.difficulty] : null;
     const cluesLeft = 6 - revealedCount;
 
     return (
@@ -238,68 +281,213 @@ export default function App() {
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
             padding: "20px"
         }}>
-            {round > 0 && (
-                <div style={{
-                    position: "fixed", top: 0, left: 0, right: 0,
-                    background: "#0d0d0d", borderBottom: "1px solid #181818",
-                    padding: "10px 20px", display: "flex", justifyContent: "space-between",
-                    fontSize: "11px", letterSpacing: "0.15em", color: "#555", zIndex: 10
-                }}>
-                    <span style={{ color: cfg?.color }}>● {cfg?.label}</span>
-                    <span>ROUND {round}</span>
-                    <span style={{ color: "#f0ede6" }}>TOTAL: {totalScore}</span>
-                </div>
-            )}
-
             <div style={{ width: "100%", maxWidth: "560px" }}>
 
+                {/* ── INTRO ── */}
                 {phase === "intro" && (
                     <div style={{ textAlign: "center" }}>
-                        <div style={{ fontSize: "11px", letterSpacing: "0.3em", color: "#444", marginBottom: "12px" }}>A DEDUCTION GAME</div>
+                        <div style={{ fontSize: "13px", letterSpacing: "0.3em", color: "#aaaaaa", marginBottom: "12px" }}>A DEDUCTION GAME</div>
                         <h1 style={{
-                            fontSize: "clamp(72px, 16vw, 130px)", fontWeight: 900, letterSpacing: "-0.04em", margin: "0 0 6px",
-                            background: "linear-gradient(135deg, #f0ede6 0%, #555 100%)",
-                            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"
+                            fontSize: "56px", fontWeight: 900, letterSpacing: "-0.03em",
+                            margin: "0 0 24px", color: "#f0ede6"
                         }}>ECHO</h1>
-                        <p style={{ color: "#555", fontSize: "12px", lineHeight: 1.9, marginBottom: "48px", letterSpacing: "0.05em" }}>
+                        <p style={{ color: "#aaaaaa", fontSize: "14px", lineHeight: 1.9, marginBottom: "36px", letterSpacing: "0.05em" }}>
                             Six clues. One answer.<br />
                             Guess sooner. Score higher.<br />
                             Wrong guess? See how warm you are.
                         </p>
-                        <div style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#444", marginBottom: "20px" }}>CHOOSE DIFFICULTY</div>
-                        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-                            {Object.entries(DIFF_CONFIG).map(([key, val]) => (
-                                <button key={key} onClick={() => selectDifficulty(key)} style={{
-                                    background: "transparent", border: "1px solid #1e1e1e",
-                                    color: "#f0ede6", padding: "18px 24px", cursor: "pointer",
-                                    fontFamily: "'Courier New', monospace", textAlign: "left",
-                                    display: "flex", justifyContent: "space-between", alignItems: "center",
-                                    transition: "border-color 0.2s, background 0.2s"
+
+                        {hasTodayPuzzles ? (
+                            <>
+                                <div style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#aaaaaa", marginBottom: "12px" }}>
+                                    TODAY · {today}
+                                </div>
+                                <div style={{ display: "flex", gap: "8px", marginBottom: "12px" }}>
+                                    {DIFFICULTIES.map(diff => {
+                                        const p = todayPuzzles[diff];
+                                        if (!p) return null;
+                                        const log = readLog(today, diff);
+                                        const dc = DIFF_CONFIG[diff];
+                                        return (
+                                            <button key={diff} onClick={() => startPuzzle(p)} style={{
+                                                flex: 1, minHeight: "110px",
+                                                background: "#0d0d0d",
+                                                border: `1px solid ${log ? dc.color + "55" : "#1e1e1e"}`,
+                                                color: "#f0ede6", padding: "14px 10px",
+                                                cursor: "pointer", fontFamily: "'Courier New', monospace",
+                                                textAlign: "center", display: "flex", flexDirection: "column",
+                                                alignItems: "center", justifyContent: "center", gap: "6px"
+                                            }}
+                                                onMouseEnter={e => e.currentTarget.style.borderColor = dc.color + "99"}
+                                                onMouseLeave={e => e.currentTarget.style.borderColor = log ? dc.color + "55" : "#1e1e1e"}
+                                            >
+                                                <div style={{ fontSize: "10px", letterSpacing: "0.18em", color: dc.color }}>{dc.label}</div>
+                                                <div style={{ fontSize: "11px", letterSpacing: "0.1em", color: "#aaaaaa" }}>
+                                                    {p.category.toUpperCase()}
+                                                </div>
+                                                {log ? (
+                                                    <div style={{ textAlign: "center" }}>
+                                                        <div style={{ fontSize: "10px", letterSpacing: "0.15em", color: log.result === "win" ? "#6bff9e" : "#ff4444", marginBottom: "2px" }}>
+                                                            {log.result === "win" ? "WIN" : "LOSE"}
+                                                        </div>
+                                                        {log.result === "win" && (
+                                                            <div style={{ fontSize: "24px", fontWeight: 700, color: dc.color, lineHeight: 1 }}>{log.score}</div>
+                                                        )}
+                                                    </div>
+                                                ) : (
+                                                    <div style={{ fontSize: "13px", color: "#888" }}>→</div>
+                                                )}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                <button onClick={openArchive} style={{
+                                    width: "100%", background: "transparent", border: "1px solid #1e1e1e",
+                                    color: "#aaaaaa", padding: "12px", fontSize: "12px", letterSpacing: "0.15em",
+                                    fontFamily: "'Courier New', monospace", cursor: "pointer"
                                 }}
-                                    onMouseEnter={e => { e.currentTarget.style.borderColor = val.color; e.currentTarget.style.background = "#0f0f0f"; }}
-                                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.background = "transparent"; }}
-                                >
-                                    <div>
-                                        <div style={{ fontSize: "13px", letterSpacing: "0.2em", color: val.color, marginBottom: "4px" }}>{val.label}</div>
-                                        <div style={{ fontSize: "11px", color: "#555" }}>{val.desc}</div>
+                                    onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#cccccc"; }}
+                                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.color = "#aaaaaa"; }}
+                                >ARCHIVE</button>
+                            </>
+                        ) : (
+                            <>
+                                <div style={{ color: "#aaaaaa", marginBottom: "28px" }}>
+                                    <div style={{ fontSize: "17px", marginBottom: "8px" }}>No puzzle today. Come back tomorrow.</div>
+                                    <div style={{ fontSize: "13px", letterSpacing: "0.15em", color: "#aaaaaa" }}>{today}</div>
+                                </div>
+                                <button onClick={openArchive} style={{
+                                    width: "100%", background: "transparent", border: "1px solid #1e1e1e",
+                                    color: "#aaaaaa", padding: "14px", fontSize: "13px", letterSpacing: "0.15em",
+                                    fontFamily: "'Courier New', monospace", cursor: "pointer"
+                                }}
+                                    onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#cccccc"; }}
+                                    onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.color = "#aaaaaa"; }}
+                                >ARCHIVE</button>
+                            </>
+                        )}
+                    </div>
+                )}
+
+                {/* ── ARCHIVE ── */}
+                {phase === "archive" && (
+                    <div>
+                        <div style={{ display: "flex", alignItems: "center", gap: "20px", marginBottom: "28px" }}>
+                            <button onClick={() => setPhase("intro")} style={{
+                                background: "none", border: "none", color: "#aaaaaa",
+                                fontFamily: "'Courier New', monospace", fontSize: "13px",
+                                letterSpacing: "0.1em", cursor: "pointer", padding: 0
+                            }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#cccccc"}
+                                onMouseLeave={e => e.currentTarget.style.color = "#aaaaaa"}
+                            >← BACK</button>
+                            <div style={{ fontSize: "13px", letterSpacing: "0.3em", color: "#aaaaaa" }}>ARCHIVE</div>
+                        </div>
+
+                        <div style={{ display: "flex", flexDirection: "column", gap: "4px", maxHeight: "72vh", overflowY: "auto" }}>
+                            {archiveDates.map(date => {
+                                const isToday = date === today;
+                                const isExpanded = !!expandedDates[date];
+                                const logs = {
+                                    easy: readLog(date, "easy"),
+                                    medium: readLog(date, "medium"),
+                                    hard: readLog(date, "hard"),
+                                };
+
+                                return (
+                                    <div key={date} style={{ border: `1px solid ${isToday ? "#252525" : "#181818"}` }}>
+                                        {/* Summary row */}
+                                        <div onClick={() => toggleDate(date)} style={{
+                                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                                            padding: "11px 14px", cursor: "pointer",
+                                            background: isExpanded ? "#111" : "#0d0d0d"
+                                        }}
+                                            onMouseEnter={e => { if (!isExpanded) e.currentTarget.style.background = "#0f0f0f"; }}
+                                            onMouseLeave={e => { if (!isExpanded) e.currentTarget.style.background = "#0d0d0d"; }}
+                                        >
+                                            <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+                                                <span style={{ fontSize: "12px", color: isToday ? "#cccccc" : "#aaaaaa", letterSpacing: "0.05em", minWidth: "88px" }}>
+                                                    {date}
+                                                </span>
+                                                <div style={{ display: "flex", gap: "5px" }}>
+                                                    {DIFFICULTIES.map(diff => {
+                                                        const log = logs[diff];
+                                                        const dc = DIFF_CONFIG[diff];
+                                                        return (
+                                                            <div key={diff} style={{
+                                                                width: "7px", height: "7px", borderRadius: "1px",
+                                                                background: log
+                                                                    ? (log.result === "win" ? dc.color : "#ff4444")
+                                                                    : "#252525"
+                                                            }} />
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                            <span style={{ fontSize: "11px", color: "#888" }}>{isExpanded ? "▲" : "▼"}</span>
+                                        </div>
+
+                                        {/* Expanded difficulty slots */}
+                                        {isExpanded && (
+                                            <div style={{ borderTop: "1px solid #181818" }}>
+                                                {DIFFICULTIES.map(diff => {
+                                                    const p = ALL_PUZZLES.find(px => px.date === date && px.difficulty === diff);
+                                                    if (!p) return null;
+                                                    const log = logs[diff];
+                                                    const dc = DIFF_CONFIG[diff];
+                                                    return (
+                                                        <div key={diff} onClick={() => startPuzzle(p)} style={{
+                                                            display: "flex", alignItems: "center",
+                                                            justifyContent: "space-between",
+                                                            padding: "10px 14px", background: "#0a0a0a",
+                                                            cursor: "pointer", borderBottom: "1px solid #111"
+                                                        }}
+                                                            onMouseEnter={e => e.currentTarget.style.background = "#0f0f0f"}
+                                                            onMouseLeave={e => e.currentTarget.style.background = "#0a0a0a"}
+                                                        >
+                                                            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                                                <span style={{
+                                                                    fontSize: "10px", letterSpacing: "0.15em", color: dc.color,
+                                                                    border: `1px solid ${dc.color}40`, padding: "2px 6px"
+                                                                }}>{dc.label}</span>
+                                                                <span style={{ fontSize: "12px", color: "#aaaaaa", letterSpacing: "0.08em" }}>
+                                                                    {p.category.toUpperCase()}
+                                                                </span>
+                                                            </div>
+                                                            {log ? (
+                                                                <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                                                    <span style={{
+                                                                        fontSize: "11px", letterSpacing: "0.12em", fontWeight: 700,
+                                                                        color: log.result === "win" ? "#6bff9e" : "#ff4444"
+                                                                    }}>{log.result === "win" ? "WIN" : "LOSE"}</span>
+                                                                    <span style={{ fontSize: "12px", color: "#aaaaaa" }}>{log.score}</span>
+                                                                </div>
+                                                            ) : (
+                                                                <span style={{ fontSize: "12px", color: "#888" }}>→</span>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        )}
                                     </div>
-                                    <span style={{ color: "#333" }}>→</span>
-                                </button>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 )}
 
+                {/* ── PLAYING ── */}
                 {phase === "playing" && puzzle && (
                     <div>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "28px" }}>
                             <div>
-                                <span onClick={() => setPhase("intro")} style={{ fontSize: "22px", fontWeight: 900, letterSpacing: "-0.03em", color: "#f0ede6", cursor: "pointer" }}>ECHO</span>
-                                <span style={{ fontSize: "10px", letterSpacing: "0.2em", color: cfg.color, marginLeft: "12px" }}>{cfg.label}</span>
+                                <span onClick={() => setPhase("intro")} style={{ fontSize: "26px", fontWeight: 900, letterSpacing: "-0.03em", color: "#f0ede6", cursor: "pointer" }}>ECHO</span>
+                                <span style={{ fontSize: "12px", letterSpacing: "0.2em", color: cfg.color, marginLeft: "12px" }}>{cfg.label}</span>
                             </div>
                             <div style={{ textAlign: "right" }}>
-                                <div style={{ fontSize: "10px", letterSpacing: "0.15em", color: "#444" }}>CATEGORY</div>
-                                <div style={{ fontSize: "12px", letterSpacing: "0.1em" }}>{puzzle.category.toUpperCase()}</div>
+                                <div style={{ fontSize: "12px", letterSpacing: "0.15em", color: "#aaaaaa" }}>CATEGORY</div>
+                                <div style={{ fontSize: "14px", letterSpacing: "0.1em" }}>{puzzle.category.toUpperCase()}</div>
                             </div>
                         </div>
 
@@ -317,8 +505,8 @@ export default function App() {
                                     borderLeft: `2px solid ${i === revealedCount - 1 ? cfg.color : "#1e1e1e"}`,
                                     animation: (i === revealedCount - 1 && clueAnim) ? "slideIn 0.45s ease" : "none"
                                 }}>
-                                    <div style={{ fontSize: "9px", color: "#444", letterSpacing: "0.15em", marginBottom: "5px" }}>CLUE {i + 1} · {SCORE_MAP[i]} PTS</div>
-                                    <div style={{ fontSize: "14px", lineHeight: 1.55, color: i === revealedCount - 1 ? "#f0ede6" : "#555" }}>{clue}</div>
+                                    <div style={{ fontSize: "11px", color: "#aaaaaa", letterSpacing: "0.15em", marginBottom: "5px" }}>CLUE {i + 1} · {SCORE_MAP[i]} PTS</div>
+                                    <div style={{ fontSize: "17px", lineHeight: 1.55, color: i === revealedCount - 1 ? "#f0ede6" : "#aaaaaa" }}>{clue}</div>
                                 </div>
                             ))}
                         </div>
@@ -334,15 +522,15 @@ export default function App() {
                                             border: `1px solid ${wc ? wc.border : "#222"}`,
                                             padding: "9px 13px", animation: "fadeIn 0.3s ease"
                                         }}>
-                                            <span style={{ color: wc ? wc.text : "#555", fontSize: "12px", flex: 1 }}>✗ {w.text}</span>
+                                            <span style={{ color: wc ? wc.text : "#aaaaaa", fontSize: "14px", flex: 1 }}>✗ {w.text}</span>
                                             {w.warmth === null ? (
-                                                <span style={{ fontSize: "10px", color: "#444", letterSpacing: "0.1em" }}>reading...</span>
+                                                <span style={{ fontSize: "12px", color: "#aaaaaa", letterSpacing: "0.1em" }}>reading...</span>
                                             ) : w.warmth === undefined ? (
-                                                <span style={{ fontSize: "10px", color: "#333" }}>—</span>
+                                                <span style={{ fontSize: "12px", color: "#888" }}>—</span>
                                             ) : (
                                                 <div style={{ textAlign: "right" }}>
-                                                    <div style={{ fontSize: "14px", fontWeight: 700, color: wc.text, lineHeight: 1 }}>{w.warmth}°</div>
-                                                    <div style={{ fontSize: "9px", color: wc.text, opacity: 0.7, letterSpacing: "0.08em", marginTop: "2px" }}>{wc.label}</div>
+                                                    <div style={{ fontSize: "17px", fontWeight: 700, color: wc.text, lineHeight: 1 }}>{w.warmth}°</div>
+                                                    <div style={{ fontSize: "11px", color: wc.text, opacity: 0.7, letterSpacing: "0.08em", marginTop: "2px" }}>{wc.label}</div>
                                                 </div>
                                             )}
                                         </div>
@@ -361,72 +549,98 @@ export default function App() {
                                 disabled={pendingWarmth}
                                 style={{
                                     flex: 1, background: "#0f0f0f", border: "1px solid #222",
-                                    color: "#f0ede6", padding: "13px 15px", fontSize: "14px",
+                                    color: "#f0ede6", padding: "13px 15px", fontSize: "17px",
                                     fontFamily: "'Courier New', monospace", outline: "none",
                                     opacity: pendingWarmth ? 0.5 : 1, transition: "opacity 0.2s"
                                 }}
                             />
                             <button onClick={handleGuess} disabled={pendingWarmth} style={{
                                 background: pendingWarmth ? "#151515" : cfg.color,
-                                color: pendingWarmth ? "#444" : "#0a0a0a",
-                                border: "none", padding: "13px 20px", fontSize: "11px",
+                                color: pendingWarmth ? "#555" : "#0a0a0a",
+                                border: "none", padding: "13px 20px", fontSize: "13px",
                                 letterSpacing: "0.2em", fontFamily: "'Courier New', monospace",
                                 fontWeight: 700, cursor: pendingWarmth ? "not-allowed" : "pointer",
                                 transition: "background 0.2s"
                             }}>GUESS</button>
                         </div>
-                        <div style={{ marginTop: "10px", fontSize: "10px", color: "#2e2e2e", letterSpacing: "0.1em" }}>
+                        <div style={{ marginTop: "10px", fontSize: "12px", color: "#888", letterSpacing: "0.1em" }}>
                             {cluesLeft > 0 ? `${cluesLeft} clue${cluesLeft > 1 ? "s" : ""} remaining` : "Last clue — final chance"}
                         </div>
                     </div>
                 )}
 
+                {/* ── WIN ── */}
                 {phase === "win" && puzzle && (
                     <div style={{ textAlign: "center" }}>
-                        <div style={{ fontSize: "10px", letterSpacing: "0.3em", color: cfg.color, marginBottom: "10px" }}>CORRECT</div>
-                        <div style={{ fontSize: "clamp(26px, 6vw, 52px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "6px" }}>
+                        <div style={{ fontSize: "12px", letterSpacing: "0.3em", color: cfg.color, marginBottom: "10px" }}>CORRECT</div>
+                        <div style={{ fontSize: "clamp(31px, 7vw, 62px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "6px" }}>
                             {puzzle.subject.toUpperCase()}
                         </div>
-                        <div style={{ color: "#444", fontSize: "11px", marginBottom: "32px" }}>{puzzle.category} · Clue {revealedCount} of 6</div>
+                        <div style={{ color: "#aaaaaa", fontSize: "13px", marginBottom: "32px" }}>{puzzle.category} · Clue {revealedCount} of 6</div>
                         <div style={{ background: "#0f0f0f", border: `1px solid ${cfg.color}30`, padding: "24px", marginBottom: "28px", display: "inline-block", minWidth: "180px" }}>
-                            <div style={{ fontSize: "9px", letterSpacing: "0.2em", color: "#444", marginBottom: "6px" }}>SCORE</div>
-                            <div style={{ fontSize: "52px", fontWeight: 900, color: cfg.color }}>+{score}</div>
-                            <div style={{ fontSize: "10px", color: "#444", marginTop: "4px" }}>TOTAL: {totalScore}</div>
+                            <div style={{ fontSize: "11px", letterSpacing: "0.2em", color: "#aaaaaa", marginBottom: "6px" }}>SCORE</div>
+                            <div style={{ fontSize: "62px", fontWeight: 900, color: cfg.color }}>+{score}</div>
                         </div>
                         <br />
-                        <button onClick={() => startRound(queue)} style={{
-                            background: cfg.color, color: "#0a0a0a", border: "none", padding: "14px 36px",
-                            fontSize: "11px", letterSpacing: "0.2em", fontFamily: "'Courier New', monospace",
-                            fontWeight: 700, cursor: "pointer"
-                        }}>NEXT ROUND</button>
-                        <br />
-                        <button onClick={() => setPhase("intro")} style={{
-                            marginTop: "14px", background: "transparent", border: "none",
-                            color: "#2a2a2a", fontSize: "10px", letterSpacing: "0.15em",
-                            fontFamily: "'Courier New', monospace", cursor: "pointer"
-                        }}>← CHANGE DIFFICULTY</button>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
+                            <button onClick={handleShare} style={{
+                                background: cfg.color, color: "#0a0a0a", border: "none", padding: "14px 36px",
+                                fontSize: "13px", letterSpacing: "0.2em", fontFamily: "'Courier New', monospace",
+                                fontWeight: 700, cursor: "pointer", minWidth: "180px"
+                            }}>{copied ? "COPIED!" : "SHARE"}</button>
+                            <button onClick={openArchive} style={{
+                                background: "transparent", border: "1px solid #1e1e1e",
+                                color: "#aaaaaa", padding: "12px 36px", minWidth: "180px",
+                                fontSize: "13px", letterSpacing: "0.15em",
+                                fontFamily: "'Courier New', monospace", cursor: "pointer"
+                            }}
+                                onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#cccccc"; }}
+                                onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.color = "#aaaaaa"; }}
+                            >ARCHIVE</button>
+                            <button onClick={() => setPhase("intro")} style={{
+                                background: "transparent", border: "none",
+                                color: "#888", fontSize: "12px", letterSpacing: "0.15em",
+                                fontFamily: "'Courier New', monospace", cursor: "pointer"
+                            }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#aaaaaa"}
+                                onMouseLeave={e => e.currentTarget.style.color = "#888"}
+                            >← HOME</button>
+                        </div>
                     </div>
                 )}
 
+                {/* ── LOSE ── */}
                 {phase === "lose" && puzzle && (
                     <div style={{ textAlign: "center" }}>
-                        <div style={{ fontSize: "10px", letterSpacing: "0.3em", color: "#ff4444", marginBottom: "10px" }}>OUT OF CLUES</div>
-                        <div style={{ fontSize: "clamp(26px, 6vw, 52px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "6px", color: "#444" }}>
+                        <div style={{ fontSize: "12px", letterSpacing: "0.3em", color: "#ff4444", marginBottom: "10px" }}>OUT OF CLUES</div>
+                        <div style={{ fontSize: "clamp(31px, 7vw, 62px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: "6px", color: "#aaaaaa" }}>
                             {puzzle.subject.toUpperCase()}
                         </div>
-                        <div style={{ color: "#333", fontSize: "11px", marginBottom: "32px" }}>{puzzle.category} · Better luck next round</div>
-                        <div style={{ color: "#444", fontSize: "11px", marginBottom: "28px" }}>Total: {totalScore}</div>
-                        <button onClick={() => startRound(queue)} style={{
-                            background: "#f0ede6", color: "#0a0a0a", border: "none", padding: "14px 36px",
-                            fontSize: "11px", letterSpacing: "0.2em", fontFamily: "'Courier New', monospace",
-                            fontWeight: 700, cursor: "pointer"
-                        }}>NEXT ROUND</button>
-                        <br />
-                        <button onClick={() => setPhase("intro")} style={{
-                            marginTop: "14px", background: "transparent", border: "none",
-                            color: "#2a2a2a", fontSize: "10px", letterSpacing: "0.15em",
-                            fontFamily: "'Courier New', monospace", cursor: "pointer"
-                        }}>← CHANGE DIFFICULTY</button>
+                        <div style={{ color: "#aaaaaa", fontSize: "13px", marginBottom: "36px" }}>{puzzle.category} · Better luck next time</div>
+                        <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
+                            <button onClick={handleShare} style={{
+                                background: "#f0ede6", color: "#0a0a0a", border: "none", padding: "14px 36px",
+                                fontSize: "13px", letterSpacing: "0.2em", fontFamily: "'Courier New', monospace",
+                                fontWeight: 700, cursor: "pointer", minWidth: "180px"
+                            }}>{copied ? "COPIED!" : "SHARE"}</button>
+                            <button onClick={openArchive} style={{
+                                background: "transparent", border: "1px solid #1e1e1e",
+                                color: "#aaaaaa", padding: "12px 36px", minWidth: "180px",
+                                fontSize: "13px", letterSpacing: "0.15em",
+                                fontFamily: "'Courier New', monospace", cursor: "pointer"
+                            }}
+                                onMouseEnter={e => { e.currentTarget.style.borderColor = "#333"; e.currentTarget.style.color = "#cccccc"; }}
+                                onMouseLeave={e => { e.currentTarget.style.borderColor = "#1e1e1e"; e.currentTarget.style.color = "#aaaaaa"; }}
+                            >ARCHIVE</button>
+                            <button onClick={() => setPhase("intro")} style={{
+                                background: "transparent", border: "none",
+                                color: "#888", fontSize: "12px", letterSpacing: "0.15em",
+                                fontFamily: "'Courier New', monospace", cursor: "pointer"
+                            }}
+                                onMouseEnter={e => e.currentTarget.style.color = "#aaaaaa"}
+                                onMouseLeave={e => e.currentTarget.style.color = "#888"}
+                            >← HOME</button>
+                        </div>
                     </div>
                 )}
             </div>
@@ -435,7 +649,7 @@ export default function App() {
         @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
         @keyframes slideIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-        input::placeholder{color:#2e2e2e}
+        input::placeholder{color:#666}
         button{transition:opacity 0.15s, transform 0.1s}
         button:hover:not(:disabled){opacity:0.82}
         button:active:not(:disabled){transform:scale(0.97)}
